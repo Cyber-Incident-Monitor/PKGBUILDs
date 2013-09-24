@@ -1,20 +1,22 @@
 # Maintainer: Gagou <gagou@rez-gif.supelec.fr>
 pkgname=dionaea-git
-pkgver=20130119
+pkgver=20130714
 pkgrel=1
 pkgdesc="A nepenthes successor"
 url="http://dionaea.carnivore.it"
 license=(GPL)
-arch=('i686' 'x86_64')
-depends=('libev' 'cython' 'libpcap' 'libxml2' 'libxslt' 'python-lxml' 'curl' 'udns' 'glib2' 'gc' 'libemu' 'liblcfg')
-makedepends=('git')
-source=(dionaea.confd
-	dionaea.rc
-	makefiles.patch)
+arch=('i686' 'x86_64' 'armv6h')
+depends=('sqlite3' 'libev' 'cython' 'libpcap' 'libxml2' 'libxslt' 'python-lxml' 'curl' 'udns' 'glib2' 'gc' 'libemu' 'liblcfg')
+makedepends=('git' 'automake')
+source=('git://git.carnivore.it/dionaea.git'
+	'dionaea.service'
+	'makefiles.patch')
 install=$pkgname.install
-md5sums=('aa126938ca73b869b3e7db224525bf5b'
-         '4290db0c5dd52063a9a27ee5a8a15d1c'
-                  'e821ffdd91d995c0577e08ccba502cf3')
+md5sums=('SKIP'
+	 'e424b0aba88da8f0fee010ec4715effc'
+         'e821ffdd91d995c0577e08ccba502cf3')
+
+backup=('opt/dionaea/etc/dionaea/dionaea.conf' 'opt/dionaea/lib/dionaea/python/dionaea/ihandlers.py')
 
 _gitroot="git://git.carnivore.it/dionaea.git"
 _gitname="dionaea"
@@ -52,7 +54,6 @@ build() {
 package() {
   cd "$srcdir/$_gitname-build"
   make DESTDIR=$pkgdir install
-  install -D -m755 $startdir/dionaea.rc $pkgdir/etc/rc.d/dionaea
-  install -D -m755 $startdir/dionaea.confd $pkgdir/etc/conf.d/dionaea
+  install -D -m755 $startdir/dionaea.service $pkgdir/etc/systemd/system/dionaea.service
 }
 

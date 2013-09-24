@@ -11,7 +11,11 @@ These packages come from the [Arch Linux AUR] and have been adjusted to run on t
 changes:
 
   - add armv6 as supported architecture
-  - systemd
+  - add sqlite3 as dependency
+  - add automake as build dependency
+  - include git://git.carnivore.it/dionaea.git as source
+  - add dionaea.conf and ihandlers.py as backup
+  - remove rc files and add systemd file
 
 status: not asked to merge changes
 
