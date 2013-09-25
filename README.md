@@ -41,7 +41,20 @@ status: asked to include armv6, no response yet
 
 First install the necessary tools for building: ```pacman -S base-devel```
 
-Then build and install the packages:
+*dionaea-git* needs *udns* which is available in the AUR.
+
+Download, build and install udns:
+
+```
+wget https://aur.archlinux.org/packages/ud/udns/udns.tar.gz
+tar -zxvf udns.tar.gz
+cd udns
+makepkg
+sudo pacman -U *.pkg.tar.xz
+```
+
+
+Then check out this repository (you may need to install git first: ```pacman -S git```). Now you can build and install our packages:
 
 ```
 cd liblcfg/
